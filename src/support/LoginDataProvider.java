@@ -16,10 +16,41 @@ public final class LoginDataProvider {
     private LoginDataProvider() {
     }
 
-    @DataProvider(name = "loginData")
-    public static Object[][] loginData() {
-        List<LoginTestData> cases = readCases();
-        return cases.stream().map(testCase -> new Object[]{testCase}).toArray(Object[][]::new);
+    @DataProvider(name = "validLoginData")
+    public static Object[][] validLoginData() {
+        return filterBy(ExpectedResult.DASHBOARD);
+    }
+
+    @DataProvider(name = "invalidLoginData")
+    public static Object[][] invalidLoginData() {
+        return filterBy(ExpectedResult.INVALID_CREDENTIALS);
+    }
+
+    @DataProvider(name = "usernameRequiredData")
+    public static Object[][] usernameRequiredData() {
+        return filterBy(ExpectedResult.USERNAME_REQUIRED);
+    }
+
+    @DataProvider(name = "passwordRequiredData")
+    public static Object[][] passwordRequiredData() {
+        return filterBy(ExpectedResult.PASSWORD_REQUIRED);
+    }
+
+    @DataProvider(name = "bothRequiredData")
+    public static Object[][] bothRequiredData() {
+        return filterBy(ExpectedResult.BOTH_REQUIRED);
+    }
+
+    private static Object[][] filterBy(ExpectedResult expectedResult) {
+        Object[][] matchingCases = readCases().stream()
+                .filter(testCase -> testCase.expectedResult() == expectedResult)
+                .map(testCase -> new Object[]{testCase})
+                .toArray(Object[][]::new);
+
+        if (matchingCases.length == 0) {
+            throw new IllegalStateException("No login test data found for expected result: " + expectedResult);
+        }
+        return matchingCases;
     }
 
     private static List<LoginTestData> readCases() {

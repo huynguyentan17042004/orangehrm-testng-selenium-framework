@@ -15,3 +15,7 @@ password, so UI automation must not claim it can distinguish those server-side s
 The executable values live in `data/login-data.csv`. Public demo
 credentials default to `Admin` / `admin123` and can be overridden through the
 `ORANGEHRM_USERNAME` and `ORANGEHRM_PASSWORD` environment variables.
+
+Rows are routed to behavior-specific TestNG providers: `validLoginData`,
+`invalidLoginData`, `usernameRequiredData`, `passwordRequiredData`, and
+`bothRequiredData`.

@@ -38,6 +38,18 @@ testng.xml
 `BasePage` sets no implicit wait. Page actions use explicit waits against visible
 or clickable UI state. Selenium Manager resolves the browser driver automatically.
 
+## Behavior-based data-driven tests
+
+Login coverage combines behavior separation with external CSV data:
+
+- Each `LoginTest` method owns one expected behavior: successful login, invalid
+  credentials, username required, password required, or both fields required.
+- Each named `LoginDataProvider` filters the shared CSV by `ExpectedResult` and
+  supplies only the rows relevant to that behavior.
+- `LoginPage` owns browser interactions; test methods own verification.
+- Adding another row for an existing behavior requires only a CSV change, not a
+  new test method.
+
 ## Configuration precedence
 
 ```text
