@@ -55,6 +55,10 @@
         <testResources>
             <testResource>
                 <directory>${project.basedir}/config</directory>
+                <includes>
+                    <include>allure.properties</include>
+                    <include>logback-test.xml</include>
+                </includes>
             </testResource>
             <testResource>
                 <directory>${project.basedir}/data</directory>

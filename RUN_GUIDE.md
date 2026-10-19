@@ -21,6 +21,10 @@ export JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home
 export PATH="$JAVA_HOME/bin:$PATH"
 ```
 
+Project tự động dùng `config/maven-settings.xml` thông qua `.mvn/maven.config` để
+tải dependency và plugin từ Maven Central. Cấu hình này tránh Maven truy cập các
+snapshot repository không cần thiết từ metadata của plugin.
+
 ## 2. Đi đến thư mục project
 
 ```bash
@@ -170,6 +174,12 @@ Password không được ghi vào log.
 
 ## 8. Lỗi thường gặp
 
+### `skip non existing resourceDirectory src/main/resources`
+
+Đây là thông báo `INFO`, không phải lỗi. Framework cố ý dùng cấu trúc rút gọn
+`src/core`, `src/pages`, `src/support`, `src/tests` thay cho `src/main` và
+`src/test`; Maven vẫn biên dịch test từ `src` theo cấu hình trong `pom.xml`.
+
 ### Maven dùng sai Java
 
 ```bash
@@ -196,3 +206,8 @@ Chạy bằng Chrome hoặc cài Firefox trước:
 
 Framework không dùng Chrome DevTools API, vì vậy cảnh báo Selenium tìm phiên bản
 CDP gần nhất không ảnh hưởng đến các test WebDriver hiện tại.
+
+### Maven cố truy cập `apache.snapshots`
+
+Hãy chạy Maven từ thư mục gốc của project để `.mvn/maven.config` được áp dụng.
+Không cần thêm `--settings` thủ công.
