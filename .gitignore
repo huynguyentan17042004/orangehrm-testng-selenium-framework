@@ -1,0 +1,11 @@
+/target/
+/.m2/
+/.allure/
+/logs/
+/artifacts/
+/.idea/
+/.vscode/
+/.github/modernize/
+*.iml
+.DS_Store
+.env

@@ -1,0 +1,7 @@
+id,username,password,expectedResult
+valid-login,${ORANGEHRM_USERNAME},${ORANGEHRM_PASSWORD},DASHBOARD
+username-required,,${ORANGEHRM_PASSWORD},USERNAME_REQUIRED
+password-required,${ORANGEHRM_USERNAME},,PASSWORD_REQUIRED
+both-required,,,BOTH_REQUIRED
+unknown-user,UnknownUser_987654,${ORANGEHRM_PASSWORD},INVALID_CREDENTIALS
+wrong-password,${ORANGEHRM_USERNAME},wrong-password-987654,INVALID_CREDENTIALS
